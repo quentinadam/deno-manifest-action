@@ -15,4 +15,4 @@ runs:
     - name: Generate manifest file
       shell: bash
       working-directory: ${{ github.workspace }}
-      run: deno run --allow-run=deno "${{ github.action_path }}/generate-manifest.ts" --type="${{ inputs.type }}" < deno.json > "${{ inputs.output_file }}"
+      run: cat deno.json | deno run --allow-run=deno "${{ github.action_path }}/generate-manifest.ts" --type="${{ inputs.type }}" | tee "${{ inputs.output_file }}"
