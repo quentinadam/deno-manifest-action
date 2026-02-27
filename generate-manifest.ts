@@ -240,7 +240,7 @@ function generateManifest({ type, sourceManifest, dependencies }: {
           return Object.fromEntries(Object.entries(exports).map(([key, value]) => [key, replaceFn(value)]));
         }
       })(ensure(sourceManifest.exports)),
-      files: ['dist', 'README.md'],
+      files: ['src', 'dist', 'README.md', '!**/*.test.ts'],
       dependencies: dependencies.length > 0
         ? Object.fromEntries(dependencies.map(({ name, version }) => [name, version]))
         : undefined,
