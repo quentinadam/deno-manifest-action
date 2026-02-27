@@ -1,0 +1,18 @@
+name: Generate manifest
+description: Generate jsr.json or package.json from deno.json
+
+inputs:
+  type:
+    description: Target manifest type (jsr or npm)
+    required: true
+  output_file:
+    description: Output manifest filename (jsr.json or package.json)
+    required: true
+
+runs:
+  using: composite
+  steps:
+    - name: Generate manifest file
+      shell: bash
+      working-directory: ${{ github.workspace }}
+      run: deno run --allow-run=deno "${{ github.action_path }}/generate-manifest.ts" --type="${{ inputs.type }}" < deno.json > "${{ inputs.output_file }}"
